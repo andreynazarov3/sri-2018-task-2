@@ -1,0 +1,22 @@
+$headerVerticalPadding: 30px;
+$headerMobileVerticalPadding: 12px;
+$appHorizontalPadding: 40px;
+$mobileHorizontalPadding: 20px;
+$logoHeight: 27px;
+$appTopPadding: ($headerVerticalPadding * 2)+$logoHeight+1;
+$mobileTopPadding: ($headerMobileVerticalPadding * 2)+$logoHeight;
+$fontFamily: "Arial",
+"sans-serif";
+$textColor: #333333;
+$mainContentHeight: 330px;
+$sectionGutter: 13px;
+%sectionH1 {
+  font-family: "Arial", "sans-serif";
+  font-size: 18px;
+  color: $textColor;
+  padding: 30px 0 20px 0;
+  margin: 0;
+}
+
+$ipadPortrait: "screen and (max-width: 960px)";
+$mobile: "screen and (max-width: 550px)";
