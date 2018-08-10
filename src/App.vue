@@ -5,11 +5,11 @@
       <div class="app-wrapper">
         <Main />
         <Scenarios />
-        <Devices />
+        <Devices @tempModalOpen="tempModalActive = true"/>
       </div>
     </main>
     <my-footer />
-    <modal-temp />
+    <modal-temp v-if="tempModalActive" @dismountTemp="tempModalActive = false" />
   </div>
 </template>
 <script>
@@ -22,6 +22,11 @@ import {
   ModalTemp
 } from "./components";
 export default {
+  data() {
+    return {
+      tempModalActive: false
+    };
+  },
   components: {
     NavBar,
     Main,

@@ -20,16 +20,17 @@
     </div>
     <div class="tiles">
       <div class="tiles-wrapper">
+        <template v-for="(item, index) in tiles">
           <Tile 
             class="big"
-            v-for="(item, index) in tiles"
             :key="index"
             :icon="item.icon"
             :text="item.text"
             :status="item.status"
             :enabled="item.enabled"
+            @click.native="handleClick()"
           />
-        
+        </template>
       </div>
     </div>
   </section>
@@ -85,6 +86,11 @@ export default {
         }
       ]
     };
+  },
+  methods: {
+    handleClick() {
+      this.$emit("tempModalOpen");
+    }
   }
 };
 </script>
