@@ -48,7 +48,7 @@ export default {
     this.mounted = true;
     this.$nextTick(function() {
       window.Draggable.create(this.$refs.selector, {
-        type: "x",
+        type: "x,y",
         edgeResistance: 1,
         bounds: this.$refs.bar
       });
