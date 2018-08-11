@@ -1,6 +1,6 @@
 <template>
 <div class="modal-overlay">
-  <transition name="scale" v-on:after-leave="$emit('dismountTemp')">
+  <transition name="scale" v-on:after-leave="$emit('dismountLight')">
     <div v-if="mounted" class="modal">
       <div class="content">
         <div class="heading">
@@ -11,23 +11,22 @@
               <p> {{ item.status }}</p>
             </div>
             <div class="temp">
-              <span>+23</span>
-              <img src="@/assets/img/icon_temperature.svg">
+              <img src="@/assets/img/icon_sun.svg">
             </div>
         </div>
         <div class="tags">
             <div class="tags-wrapper">
               <a href="#" class="active">Вручную</a>
-              <a href="#">Холодно</a>
-              <a href="#">Тепло</a>
-              <a href="#">Жарко</a>
+              <a href="#">Дневной свет</a>
+              <a href="#">Вечерний свет</a>
+              <a href="#">Рассвет</a>
             </div>
           </div>
         <div class="controller">
           <div class="bar" ref="bar">
             <div class="selector" ref="selector"></div>
-            <span class="low">+30</span>
-            <span class="high">-10</span>
+            <span class="low"><img src="@/assets/img/icon_sun_white.svg"></span>
+            <span class="high"><img src="@/assets/img/icon_sun_white.svg"></span>
           </div>
         </div>
       </div>
@@ -110,12 +109,7 @@ export default {
     position: relative;
     height: 60px;
     width: 100%;
-    background-image: linear-gradient(
-      -90deg,
-      #068fff 2%,
-      #ffd800 51%,
-      #f76b1c 100%
-    );
+    background-image: linear-gradient(-85deg, #ffe682 2%, #ff9e00 98%);
     border-radius: 30px;
     padding: 0 20px;
     @media #{$mobile} {
@@ -150,10 +144,12 @@ export default {
   &-wrapper {
     margin: 0 -5px;
     display: flex;
+    overflow: auto;
   }
   a {
     display: flex;
     align-items: center;
+    flex-shrink: 0;
     line-height: 30px;
     margin: 0 5px;
     background: #f7f7f7;

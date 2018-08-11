@@ -20,17 +20,18 @@
     </div>
     <div class="tiles">
       <div class="tiles-wrapper">
-        <template v-for="(item, index) in tiles">
+       
           <Tile 
+             v-for="(item, index) in tiles"
             class="big"
             :key="index"
             :icon="item.icon"
             :text="item.text"
             :status="item.status"
             :enabled="item.enabled"
-            @click.native="handleClick()"
+            @click.native="handleClick(item)"
           />
-        </template>
+      
       </div>
     </div>
   </section>
@@ -52,44 +53,55 @@ export default {
           icon: require("@/assets/img/icon_sun.svg"),
           text: "Xiaomi Yeelight LED Smart Bulb",
           status: "Включено",
-          enabled: true
+          enabled: true,
+          type: "light"
         },
         {
           icon: require("@/assets/img/icon_sun.svg"),
           text: "D-Link Omna 180 Cam",
           status: "Включится в 17:00",
-          enabled: false
+          enabled: false,
+          type: "light"
         },
         {
           icon: require("@/assets/img/icon_temperature.svg"),
           text: "Elgato Eve Degree Connected",
           status: "Выключено до 17:00",
-          enabled: false
+          enabled: false,
+          type: "temp"
         },
         {
           icon: require("@/assets/img/icon_sun.svg"),
           text: "LIFX Mini Day & Dusk A60 E27",
           status: "Включится в 17:00",
-          enabled: false
+          enabled: false,
+          type: "light"
         },
         {
           icon: require("@/assets/img/icon_sun.svg"),
           text: "Xiaomi Mi Air Purifier 2S",
           status: "Включено",
-          enabled: true
+          enabled: true,
+          type: "light"
         },
         {
           icon: require("@/assets/img/icon_sun.svg"),
           text: "Philips Zhirui",
           status: "Выключено",
-          enabled: false
+          enabled: false,
+          type: "light"
         }
       ]
     };
   },
   methods: {
-    handleClick() {
-      this.$emit("tempModalOpen");
+    handleClick(item) {
+      switch (item.type) {
+        case "light":
+          return this.$emit("lightModalOpen", item);
+        case "temp":
+          return this.$emit("tempModalOpen", item);
+      }
     }
   }
 };

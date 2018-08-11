@@ -18,6 +18,7 @@
             :text="item.text"
             :status="item.status"
             :enabled="item.enabled"
+            @click.native="handleClick(item)"
           />
           </div>
         </div>
@@ -31,6 +32,7 @@
             :text="item.text"
             :status="item.status"
             :enabled="item.enabled"
+            @click.native="handleClick(item)"
           /></div>
         </div>
         <div class="tiles-col">
@@ -43,6 +45,7 @@
             :text="item.text"
             :status="item.status"
             :enabled="item.enabled"
+            @click.native="handleClick(item)"
           />
         </div>
       </div>
@@ -66,34 +69,49 @@ export default {
           icon: require("@/assets/img/icon_sun.svg"),
           text: "Выключить весь свет в доме и во дворе",
           status: "",
-          enabled: true
+          enabled: true,
+          type: "light"
         },
         {
           icon: require("@/assets/img/icon_scheduled.svg"),
           text: "Я ухожу",
           status: "",
-          enabled: false
+          enabled: false,
+          type: "light"
         },
         {
           icon: require("@/assets/img/icon_sun.svg"),
           text: "Включить свет в коридоре",
           status: "",
-          enabled: true
+          enabled: true,
+          type: "light"
         },
         {
           icon: require("@/assets/img/icon_temperature.svg"),
           text: "Набрать горячую ванну",
           status: "Начнётся в 18:00",
-          enabled: true
+          enabled: true,
+          type: "temp"
         },
         {
           icon: require("@/assets/img/icon_temperature.svg"),
           text: "Сделать пол тёплым во всей квартире",
           status: "",
-          enabled: true
+          enabled: true,
+          type: "temp"
         }
       ]
     };
+  },
+  methods: {
+    handleClick(item) {
+      switch (item.type) {
+        case "light":
+          return this.$emit("lightModalOpen", item);
+        case "temp":
+          return this.$emit("tempModalOpen", item);
+      }
+    }
   }
 };
 </script>

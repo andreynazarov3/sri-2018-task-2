@@ -3,13 +3,14 @@
     <nav-bar />
     <main>
       <div class="app-wrapper">
-        <Main />
-        <Scenarios />
-        <Devices @tempModalOpen="tempModalActive = true"/>
+        <Main @lightModalOpen="(item) => openModal(item)" @tempModalOpen="(item) => openModal(item)"/>
+        <Scenarios @lightModalOpen="(item) => openModal(item)" @tempModalOpen="(item) => openModal(item)"/>
+        <Devices @lightModalOpen="(item) => openModal(item)" @tempModalOpen="(item) => openModal(item)"/>
       </div>
     </main>
     <my-footer />
-    <modal-temp v-if="tempModalActive" @dismountTemp="tempModalActive = false" />
+    <modal-temp :item="item" v-if="tempModalActive" @dismountTemp="tempModalActive = false" />
+    <modal-light :item="item" v-if="lightModalActive" @dismountLight="lightModalActive = false" />
   </div>
 </template>
 <script>
@@ -19,12 +20,26 @@ import {
   Main,
   Scenarios,
   Devices,
-  ModalTemp
+  ModalTemp,
+  ModalLight
 } from "./components";
 export default {
+  methods: {
+    openModal(item) {
+      this.item = item;
+      switch (item.type) {
+        case "light":
+          return (this.lightModalActive = true);
+        case "temp":
+          return (this.tempModalActive = true);
+      }
+    }
+  },
   data() {
     return {
-      tempModalActive: false
+      item: null,
+      tempModalActive: false,
+      lightModalActive: false
     };
   },
   components: {
@@ -33,7 +48,8 @@ export default {
     Scenarios,
     Devices,
     MyFooter,
-    ModalTemp
+    ModalTemp,
+    ModalLight
   }
 };
 </script>
